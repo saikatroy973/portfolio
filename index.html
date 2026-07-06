@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saikat Roy | DevOps / SRE</title>
+  <meta name="description" content="Saikat Roy — DevOps / Site Reliability Engineer" />
+  <meta name="author" content="Saikat Roy" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #09090b;
+      --bg-card: #18181b;
+      --text: #fafafa;
+      --text-sec: #a1a1aa;
+      --text-muted: #52525b;
+      --accent: #6366f1;
+      --accent-glow: rgba(99,102,241,0.15);
+      --border: #27272a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(9,9,11,.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo { font-weight: 700; font-size: .95rem; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; color: var(--text-sec);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .hamburger {
+      display: none; background: none; border: none;
+      color: var(--text); font-size: 1.4rem; cursor: pointer;
+    }
+
+    /* ── hero ── */
+    .hero {
+      padding: 150px 0 72px;
+      text-align: center;
+      position: relative;
+    }
+    .dl-btn {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 10px 24px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--accent);
+      transition: background .2s, color .2s, box-shadow .2s;
+    }
+    .dl-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      margin-bottom: 6px;
+    }
+    .hero .role {
+      font-size: 1rem; color: var(--accent); font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .hero .contact {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px 6px; font-size: .82rem; color: var(--text-sec);
+    }
+    .hero .contact .sep { color: var(--text-muted); }
+    .hero .contact a:hover { color: var(--accent); }
+
+    /* ── sections ── */
+    section { padding: 60px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    .sec-title {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── summary ── */
+    .summary { color: var(--text-sec); font-size: .9rem; max-width: 720px; }
+
+    /* ── skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .skill-cat h3 {
+      font-size: .82rem; font-weight: 600; color: var(--text);
+      margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 5px 11px; border-radius: 5px;
+      font-size: .78rem; color: var(--text-sec);
+      transition: border-color .2s, color .2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── experience ── */
+    .exp { margin-bottom: 52px; }
+    .exp:last-child { margin-bottom: 0; }
+    .exp-top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 6px; margin-bottom: 2px;
+    }
+    .exp-role { font-size: 1.05rem; font-weight: 600; }
+    .exp-date { font-size: .82rem; color: var(--text-muted); }
+    .exp-co { font-size: .88rem; color: var(--accent); margin-bottom: 18px; }
+    .proj {
+      margin-bottom: 22px;
+      padding-left: 18px;
+      border-left: 2px solid var(--border);
+    }
+    .proj:last-child { margin-bottom: 0; }
+    .proj h4 { font-size: .92rem; font-weight: 600; margin-bottom: 8px; }
+    .proj ul { list-style: none; margin-bottom: 10px; }
+    .proj li {
+      font-size: .84rem; color: var(--text-sec);
+      padding: 3px 0 3px 18px; position: relative;
+    }
+    .proj li::before {
+      content: ''; position: absolute; left: 0; top: 11px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .proj .stack {
+      font-size: .78rem; color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── education / certs ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: .92rem; font-weight: 600; margin-bottom: 2px; }
+    .card p { font-size: .84rem; color: var(--text-sec); }
+
+    /* ── footer ── */
+    footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .f-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 14px; }
+    .f-links a {
+      font-size: .84rem; color: var(--text-sec);
+      transition: color .2s;
+    }
+    .f-links a:hover { color: var(--accent); }
+    .f-copy { font-size: .78rem; color: var(--text-muted); }
+
+    /* ── scroll-to-top ── */
+    .scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s;
+      transform: translateY(8px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    /* ── responsive ── */
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none; position: absolute; top: 56px; left: 0; right: 0;
+        flex-direction: column; background: rgba(9,9,11,.96);
+        padding: 20px 28px; gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .hero .contact { flex-direction: column; align-items: center; }
+      .hero .contact .sep { display: none; }
+      .exp-top { flex-direction: column; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="nav-logo">SR</a>
+    <button class="hamburger" id="burger" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <h1>Saikat Roy</h1>
+    <p class="role">DevOps / Site Reliability Engineer</p>
+    <div class="contact">
+      <a href="tel:+917047265894">+91 70472 65894</a>
+      <span class="sep">|</span>
+      <a href="mailto:saikatroy97@outlook.com">saikatroy97@outlook.com</a>
+      <span class="sep">|</span>
+      <a href="https://github.com/saikatroy973" target="_blank" rel="noopener">github.com/saikatroy973</a>
+      <span class="sep">|</span>
+      <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">linkedin.com/in/saikatroy973</a>
+    </div>
+    <a href="https://drive.google.com/file/d/1w1lyFjH8AB7gdeMovXKgXKlUamov6ru7/view?usp=sharing" target="_blank" rel="noopener" class="dl-btn">⬇ Download CV</a>
+  </div>
+</header>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <h2 class="sec-title">About</h2>
+    <p class="summary">
+      DevOps / Site Reliability Engineer (SRE) with around 3 years of experience
+      building and running production systems on Kubernetes and AWS. Skilled in
+      CI/CD, GitOps, Infrastructure as Code (Terraform), automation with Ansible,
+      and monitoring and logging with Prometheus, Grafana, and the ELK stack.
+      I focus on faster incident response, troubleshooting, and scalability,
+      improving reliability with SLO-based alerting while keeping systems secure
+      and cost-efficient.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════ SKILLS ════════════════════ -->
+<section id="skills">
+  <div class="wrap">
+    <h2 class="sec-title">Technical Skills</h2>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </div>
+</section>
+
+<!-- ════════════════════ EXPERIENCE ════════════════════ -->
+<section id="experience">
+  <div class="wrap">
+    <h2 class="sec-title">Experience</h2>
+    <div id="expContainer"></div>
+  </div>
+</section>
+
+<!-- ════════════════════ EDUCATION ════════════════════ -->
+<section id="education">
+  <div class="wrap">
+    <h2 class="sec-title">Education &amp; Certifications</h2>
+    <div class="card">
+      <h3>B.Tech in Computer Science</h3>
+      <p>MAKAUT, West Bengal</p>
+    </div>
+    <div class="card">
+      <h3>AWS Certified Cloud Practitioner (CLF-C02)</h3>
+    </div>
+    <div class="card">
+      <h3>AWS Certified Data Engineer — Associate</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-links">
+      <a href="https://github.com/saikatroy973" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:saikatroy97@outlook.com">Email</a>
+    </div>
+    <p class="f-copy">&copy; 2026 Saikat Roy. Built with passion.</p>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<script>
+/* ── skills data ── */
+const skills = [
+  { cat: "Cloud", tags: ["AWS (EKS, EC2, S3, IAM, Lambda, CloudWatch)", "Open to Azure & GCP"] },
+  { cat: "Containers & Orchestration", tags: ["Kubernetes (kubeadm, EKS, Kind, K3s)", "Docker", "Helm"] },
+  { cat: "CI/CD, GitOps & VCS", tags: ["GitHub Actions", "Argo CD", "Git", "GitOps workflows"] },
+  { cat: "IaC & Automation", tags: ["Terraform", "Ansible"] },
+  { cat: "Scripting & Languages", tags: ["Python", "SQL", "Bash", "Shell"] },
+  { cat: "Monitoring & Logging", tags: ["Prometheus", "Grafana", "ELK stack", "CloudWatch Logs", "SLO/SLI alerting"] },
+  { cat: "Networking & Security", tags: ["DNS", "TCP/IP", "Load balancing", "Ingress", "Network policies", "RBAC", "TLS (cert-manager)", "Trivy", "Admission policies"] },
+  { cat: "Platform & Streaming", tags: ["Linux admin", "etcd", "KEDA autoscaling", "Kafka (Strimzi)", "Kafka Connect"] }
+];
+
+document.getElementById("skillsGrid").innerHTML = skills.map(s => `
+  <div class="skill-cat">
+    <h3>${s.cat}</h3>
+    <div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+  </div>
+`).join("");
+
+/* ── experience data ── */
+const experience = [
+  {
+    role: "DevOps / Site Reliability Engineer",
+    company: "Tech Mahindra",
+    date: "Mar 2023 — Apr 2026",
+    projects: [
+      {
+        title: "Production-Grade Kubernetes Platform (GitOps + Observability)",
+        bullets: [
+          "Provisioned an EKS cluster and supporting infrastructure with Terraform, making the full environment reproducible from a single apply.",
+          "Set up GitOps with Argo CD for automatic sync, self-healing deployments, and one-click rollback.",
+          "Added Prometheus and Grafana monitoring with custom metrics and SLO alerts, and centralized logging with the ELK stack and CloudWatch Logs to speed up troubleshooting and incident resolution.",
+          "Exposed services through load-balanced ingress with automated TLS (cert-manager), and scanned container images with Trivy for vulnerability management in the CI/CD pipeline.",
+          "Automated server configuration and routine operations with Ansible, and enforced admission policies (no latest tag, resource limits, run as non-root) to improve cluster security."
+        ],
+        stack: "Kubernetes (EKS/Kind), Terraform, Ansible, Prometheus, Grafana, ELK, Trivy, GitHub Actions, Helm"
+      },
+      {
+        title: "Real-Time Event Streaming Pipeline with Kafka on Kubernetes",
+        bullets: [
+          "Deployed a highly available Kafka cluster on Kubernetes using the Strimzi operator, with topics and ACLs managed declaratively as Kubernetes CRDs.",
+          "Built producer and consumer services for real-time pipeline processing.",
+          "Configured KEDA to autoscale consumers on consumer-group lag, keeping end-to-end latency stable under load spikes and scaling pods to zero when idle.",
+          "Streamed data to an S3 data lake via Kafka Connect, and monitored broker health, throughput, and consumer lag with Prometheus and Grafana dashboards and alerts."
+        ],
+        stack: "Kafka (Strimzi operator), Kubernetes, Schema Registry, Kafka Connect, Prometheus/Grafana, Terraform"
+      }
+    ]
+  }
+];
+
+document.getElementById("expContainer").innerHTML = experience.map(e => `
+  <div class="exp">
+    <div class="exp-top">
+      <span class="exp-role">${e.role}</span>
+      <span class="exp-date">${e.date}</span>
+    </div>
+    <p class="exp-co">${e.company}</p>
+    ${e.projects.map(p => `
+      <div class="proj">
+        <h4>${p.title}</h4>
+        <ul>${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        <p class="stack">Stack: ${p.stack}</p>
+      </div>
+    `).join("")}
+  </div>
+`).join("");
+
+/* ── nav toggle ── */
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("navLinks");
+burger.addEventListener("click", () => navLinks.classList.toggle("open"));
+navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+
+/* ── scroll-to-top ── */
+const stb = document.getElementById("scrollTop");
+window.addEventListener("scroll", () => {
+  stb.classList.toggle("visible", window.scrollY > 400);
+});
+stb.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>
+
+</body>
+</html>
