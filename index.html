@@ -187,6 +187,50 @@
     .card h3 { font-size: .92rem; font-weight: 600; margin-bottom: 2px; }
     .card p { font-size: .84rem; color: var(--text-sec); }
 
+    /* ── projects ── */
+    .proj-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin-bottom: 14px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .proj-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .proj-card h3 {
+      font-size: .95rem; font-weight: 600; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .proj-card h3 a {
+      color: var(--text);
+      transition: color .2s;
+    }
+    .proj-card h3 a:hover { color: var(--accent); }
+    .proj-card .badge {
+      font-size: .65rem; font-weight: 500;
+      background: var(--accent-glow); color: var(--accent);
+      padding: 2px 8px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .proj-card p {
+      font-size: .84rem; color: var(--text-sec);
+      margin-bottom: 10px; line-height: 1.6;
+    }
+    .proj-card .proj-stack {
+      font-size: .78rem; color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .proj-card .proj-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .82rem; font-weight: 500;
+      color: var(--accent);
+      transition: gap .2s;
+    }
+    .proj-card .proj-link:hover { gap: 10px; }
+
     /* ── footer ── */
     footer {
       padding: 44px 0;
@@ -243,6 +287,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
     </ul>
   </div>
@@ -312,6 +357,34 @@
     <div class="card">
       <h3>AWS Certified Data Engineer — Associate</h3>
     </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROJECTS ════════════════════ -->
+<section id="projects">
+  <div class="wrap">
+    <h2 class="sec-title">Projects</h2>
+
+    <div class="proj-card">
+      <h3>
+        <a href="https://github.com/saikatroy973/eks-gitops-platform" target="_blank" rel="noopener">EKS GitOps Platform</a>
+        <span class="badge">Featured</span>
+      </h3>
+      <p>Production-grade Kubernetes platform with full GitOps workflow, centralized observability, and security-first approach. Provisioned with Terraform, configured with Ansible, deployed via Argo CD.</p>
+      <p class="proj-stack">Kubernetes (EKS) · Terraform · Ansible · Argo CD · Prometheus · Grafana · ELK · Trivy · Helm · GitHub Actions</p>
+      <a class="proj-link" href="https://github.com/saikatroy973/eks-gitops-platform" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+
+    <div class="proj-card">
+      <h3>
+        <a href="https://github.com/saikatroy973/kafka-event-streaming" target="_blank" rel="noopener">Kafka Event Streaming</a>
+        <span class="badge">Featured</span>
+      </h3>
+      <p>Real-time event streaming pipeline with Kafka on Kubernetes. Features KEDA autoscaling on consumer lag, S3 data lake sink via Kafka Connect, and full Prometheus/Grafana monitoring.</p>
+      <p class="proj-stack">Kafka (Strimzi) · Kubernetes · Schema Registry · Kafka Connect · KEDA · Prometheus · Grafana · Terraform · Python</p>
+      <a class="proj-link" href="https://github.com/saikatroy973/kafka-event-streaming" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+
   </div>
 </section>
 
