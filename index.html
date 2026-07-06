@@ -330,13 +330,13 @@
 <script>
 /* ── skills data ── */
 const skills = [
-  { cat: "Cloud", tags: ["AWS (EKS, EC2, S3, IAM, Lambda, CloudWatch)", "Open to Azure & GCP"] },
-  { cat: "Containers & Orchestration", tags: ["Kubernetes (kubeadm, EKS, Kind, K3s)", "Docker", "Helm"] },
+  { cat: "Cloud", tags: ["AWS (EKS, EC2, S3, IAM, Lambda, CloudWatch)", "Azure (AKS, Blob, IAM)", "GCP (GKE, Cloud Storage)"] },
+  { cat: "Containers & Orchestration", tags: ["Kubernetes (kubeadm, EKS, AKS, GKE, Kind, K3s)", "Docker", "Helm", "Kustomize"] },
   { cat: "CI/CD, GitOps & VCS", tags: ["GitHub Actions", "Argo CD", "Git", "GitOps workflows"] },
   { cat: "IaC & Automation", tags: ["Terraform", "Ansible"] },
   { cat: "Scripting & Languages", tags: ["Python", "SQL", "Bash", "Shell"] },
   { cat: "Monitoring & Logging", tags: ["Prometheus", "Grafana", "ELK stack", "CloudWatch Logs", "SLO/SLI alerting"] },
-  { cat: "Networking & Security", tags: ["DNS", "TCP/IP", "Load balancing", "Ingress", "Network policies", "RBAC", "TLS (cert-manager)", "Trivy", "Admission policies"] },
+  { cat: "Security", tags: ["OPA Gatekeeper", "Falco", "Trivy", "Vault", "RBAC", "TLS", "Network Policies"] },
   { cat: "Platform & Streaming", tags: ["Linux admin", "etcd", "KEDA autoscaling", "Kafka (Strimzi)", "Kafka Connect"] }
 ];
 
@@ -376,6 +376,18 @@ const experience = [
           "Streamed data to an S3 data lake via Kafka Connect, and monitored broker health, throughput, and consumer lag with Prometheus and Grafana dashboards and alerts."
         ],
         stack: "Kafka (Strimzi operator), Kubernetes, Schema Registry, Kafka Connect, Prometheus/Grafana, Terraform"
+      },
+      {
+        title: "DevSecOps Pipeline with Vault, OPA & Falco",
+        link: "https://github.com/saikatroy973/devsecops-pipeline",
+        bullets: [
+          "Deployed HashiCorp Vault with Raft HA for centralized secret management and dynamic credential rotation.",
+          "Implemented OPA Gatekeeper policies (deny latest tag, require labels, require limits, deny privileged), blocking 100% of non-compliant deployments.",
+          "Configured Falco runtime threat detection with custom rules for drift, network anomalies, and sensitive file access.",
+          "Integrated Trivy operator for continuous image and filesystem vulnerability scanning with automated alerts.",
+          "Built default-deny network policies and pod security standards (non-root, read-only rootfs, drop capabilities)."
+        ],
+        stack: "Vault, OPA Gatekeeper, Falco, Trivy, Terraform, Kubernetes, Helm, GitHub Actions"
       }
     ]
   }
