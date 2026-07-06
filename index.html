@@ -431,6 +431,7 @@ const experience = [
     projects: [
       {
         title: "Production-Grade Kubernetes Platform (GitOps + Observability)",
+        link: "https://github.com/saikatroy973/eks-gitops-platform",
         bullets: [
           "Provisioned an EKS cluster and supporting infrastructure with Terraform, making the full environment reproducible from a single apply.",
           "Set up GitOps with Argo CD for automatic sync, self-healing deployments, and one-click rollback.",
@@ -442,6 +443,7 @@ const experience = [
       },
       {
         title: "Real-Time Event Streaming Pipeline with Kafka on Kubernetes",
+        link: "https://github.com/saikatroy973/kafka-event-streaming",
         bullets: [
           "Deployed a highly available Kafka cluster on Kubernetes using the Strimzi operator, with topics and ACLs managed declaratively as Kubernetes CRDs.",
           "Built producer and consumer services for real-time pipeline processing.",
@@ -463,7 +465,7 @@ document.getElementById("expContainer").innerHTML = experience.map(e => `
     <p class="exp-co">${e.company}</p>
     ${e.projects.map(p => `
       <div class="proj">
-        <h4>${p.title}</h4>
+        <h4>${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dashed var(--accent);transition:border-color .2s" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='transparent'">${p.title} ↗</a>` : p.title}</h4>
         <ul>${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
         <p class="stack">Stack: ${p.stack}</p>
       </div>
