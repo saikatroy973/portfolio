@@ -378,15 +378,16 @@ const experience = [
         stack: "Kafka (Strimzi operator), Kubernetes, Schema Registry, Kafka Connect, Prometheus/Grafana, Terraform"
       },
       {
-        title: "Self-Hosted LLM Guide with llama.cpp",
+        title: "Self-Hosted Local LLM with llama.cpp",
         link: "https://github.com/saikatroy973/self-hosted-local-llm",
         bullets: [
-          "Created comprehensive guide for self-hosting open-weight LLMs (GLM 5.2) using llama.cpp for maximum privacy and control.",
-          "Implemented Docker containerization and automated setup scripts for one-click deployment.",
-          "Developed Python client for interacting with local LLM servers using OpenAI-compatible API.",
-          "Documented quantization techniques (1-bit to 16-bit) and hardware requirements for optimal performance."
+          "Deployed and self-hosted the GLM-5.2 open-weight Large Language Model on a Linux VPS using Llama.cpp, enabling private, offline inference with full control over model execution.",
+          "Configured and optimized GGUF quantized models (Q1/Q4) to balance memory usage, inference speed, and model accuracy on CPU-based infrastructure.",
+          "Automated model acquisition from Hugging Face using the Hugging Face CLI, managed multi-part model weights, and configured inference parameters including context window and Jinja chat templates.",
+          "Exposed an OpenAI-compatible REST API (/v1/chat/completions) for seamless integration with AI applications, development tools, and custom clients.",
+          "Evaluated deployment performance, hardware utilization, context-window tuning, and CPU-only inference while comparing quantization trade-offs and scalability for future GPU-based deployments."
         ],
-        stack: "llama.cpp, Python, Docker, Docker Compose, GLM 5.2, Hugging Face"
+        stack: "llama.cpp, Python, Docker, Docker Compose, GLM 5.2, Hugging Face, Linux VPS"
       }
     ]
   }
