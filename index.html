@@ -7,370 +7,292 @@
   <meta name="description" content="Saikat Roy — DevOps / Site Reliability Engineer" />
   <meta name="author" content="Saikat Roy" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg: #000000;
-      --surface: #1d1d1f;
-      --surface-hover: #2a2a2c;
-      --text: #f5f5f7;
-      --text-secondary: #86868b;
-      --text-tertiary: #6e6e73;
-      --accent: #2997ff;
-      --accent-hover: #0071e3;
-      --border: #2a2a2c;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
-      --radius-pill: 980px;
+      --text: #a8a8a8;
+      --text-bright: #e0e0e0;
+      --comment: #4a4a4a;
+      /* Muted, non-punchy terminal colors */
+      --green: #6a8c6a;   /* Muted sage green */
+      --blue: #6a8caa;    /* Muted slate blue */
+      --yellow: #a89060;  /* Muted olive/khaki */
+      --magenta: #8a7a9a; /* Muted dusty plum */
+      --red: #a86a6a;     /* Muted terracotta */
     }
 
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      letter-spacing: -0.01em;
+      line-height: 1.6;
+      font-size: 14px;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
-    a:hover { color: var(--accent-hover); text-decoration: underline; }
-
-    ::selection { background: rgba(41, 151, 255, 0.3); color: var(--text); }
-
-    /* ── navigation ── */
-    .nav-wrapper {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    a { 
+      color: var(--blue); 
+      text-decoration: underline; 
+      text-decoration-color: var(--comment);
+      transition: color .15s, text-decoration-color .15s; 
     }
-    .nav {
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    a:hover { 
+      color: var(--text-bright); 
+      text-decoration-color: var(--blue);
     }
-    .nav-brand {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--text);
+
+    ::selection { background: var(--blue); color: var(--bg); }
+
+    /* ── prompt ── */
+    .prompt { 
+      margin-bottom: 12px; 
+      font-size: 0.9rem; 
+      display: flex; 
+      flex-wrap: wrap; 
+      align-items: baseline;
+    }
+    .prompt .user, .prompt .host { color: var(--green); }
+    .prompt .at, .prompt .colon { color: var(--comment); }
+    .prompt .path { color: var(--blue); }
+    .prompt .dollar { color: var(--comment); margin: 0 6px 0 2px; }
+    .prompt .cmd { color: var(--text); }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--text-bright);
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ── header ── */
+    header { margin-bottom: 48px; }
+    h1 { 
+      color: var(--text-bright); 
+      font-size: 1.5rem; 
+      font-weight: 700; 
+      margin: 8px 0 4px; 
       letter-spacing: -0.02em;
     }
-    .nav-links {
-      display: flex;
-      gap: 28px;
+    .hero-subtitle { 
+      font-size: 0.95rem; 
+      color: var(--yellow); 
+      margin-bottom: 24px; 
     }
-    .nav-links a {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 400;
-      transition: color 0.2s ease;
-    }
-    .nav-links a:hover { color: var(--text); text-decoration: none; }
-
-    .menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; }
-    .menu-svg { width: 24px; height: 24px; fill: currentColor; }
-
-    /* ── container ── */
-    .container {
-      max-width: 840px;
-      margin: 0 auto;
-      padding: 120px 24px 80px;
-    }
-
-    /* ── hero ── */
-    .hero { text-align: center; margin-bottom: 96px; }
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 600;
-      letter-spacing: -0.04em;
-      margin-bottom: 16px;
-      background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero .subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      color: var(--text-secondary);
-      font-weight: 400;
-      margin-bottom: 32px;
-    }
-    .hero-contact {
+    .hero-contact { 
+      font-size: 0.85rem; 
+      color: var(--comment); 
+      margin-bottom: 24px; 
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      font-size: 1rem;
-      color: var(--text);
+      gap: 6px;
     }
-    .hero-contact a { color: var(--text); }
-    .hero-contact a:hover { color: var(--accent); text-decoration: none; }
-    
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--text);
-      color: var(--bg);
-      font-weight: 500;
-      padding: 12px 24px;
-      border-radius: var(--radius-pill);
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-      border: 1px solid transparent;
-    }
-    .btn-primary:hover {
-      background: #e0e0e0;
-      color: var(--bg);
+    .hero-contact a { text-decoration: none; color: var(--text); }
+    .hero-contact a:hover { color: var(--blue); }
+
+    .dl-btn { 
+      display: inline-block; 
+      color: var(--text); 
       text-decoration: none;
-      transform: scale(1.02);
+      font-size: 0.85rem; 
+      margin-bottom: 32px;
+      transition: color .15s;
     }
-    .btn-primary svg { width: 16px; height: 16px; fill: currentColor; }
+    .dl-btn:hover { color: var(--text-bright); text-decoration: none; }
+    .dl-btn .cmd-sym { color: var(--green); margin-right: 4px; }
+    .dl-btn .file { color: var(--blue); text-decoration: underline; text-decoration-color: var(--comment); }
+    .dl-btn:hover .file { text-decoration-color: var(--blue); }
+
+    nav { 
+      font-size: 0.85rem; 
+      display: flex; 
+      flex-wrap: wrap;
+      gap: 8px 16px; 
+      margin-bottom: 16px;
+    }
+    nav a { 
+      text-decoration: none; 
+      color: var(--green); 
+    }
+    nav a:hover { color: var(--text-bright); text-decoration: none; }
+    nav a::before { content: "["; color: var(--comment); margin-right: 2px; }
+    nav a::after { content: "]"; color: var(--comment); margin-left: 2px; }
 
     /* ── sections ── */
-    section { margin-bottom: 96px; scroll-margin-top: 80px; }
-    
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 32px;
-      color: var(--text);
-    }
+    section { margin-bottom: 48px; scroll-margin-top: 20px; }
+    section:last-child { margin-bottom: 0; }
+    .section-prompt { margin-bottom: 16px; }
+    .divider { border-bottom: 1px solid var(--comment); margin-bottom: 32px; opacity: 0.5; }
 
     /* ── about ── */
-    .about-text {
-      font-size: 1.125rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      letter-spacing: -0.01em;
+    .about-text { 
+      font-size: 0.9rem; 
+      line-height: 1.8; 
     }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    .about-text .tech { color: var(--text); font-weight: 500; }
+    .about-text strong { color: var(--text-bright); font-weight: 600; }
+    .about-text .tech { color: var(--magenta); }
 
     /* ── skills ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
+    .skill-cat { 
+      margin-bottom: 12px; 
+      font-size: 0.85rem;
     }
-    .skill-cat h3 {
-      font-size: 1rem;
-      font-weight: 600;
+    .skill-cat-label { 
+      color: var(--yellow); 
+      margin-right: 8px; 
+    }
+    .skill-cat-label::after { content: ":"; color: var(--comment); }
+    .tags { 
+      display: inline; 
       color: var(--text);
-      margin-bottom: 16px;
-      letter-spacing: -0.01em;
     }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .tag { display: inline; }
+    .tag::after { 
+      content: ", "; 
+      color: var(--comment); 
     }
-    .tag {
-      background: var(--surface);
-      color: var(--text);
-      padding: 8px 16px;
-      border-radius: var(--radius-pill);
-      font-size: 0.875rem;
-      font-weight: 400;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .tag:hover {
-      background: var(--surface-hover);
-      border-color: rgba(255,255,255,0.1);
-    }
+    .tag:last-child::after { content: ""; }
 
     /* ── experience ── */
-    .exp-card {
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      margin-bottom: 24px;
-      transition: transform 0.2s ease;
-    }
-    .exp-role {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
-    }
-    .exp-meta {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .exp-meta .company { color: var(--accent); }
-    .exp-meta .date { color: var(--text-tertiary); }
-    .exp-meta .dot { width: 4px; height: 4px; background: var(--text-tertiary); border-radius: 50%; }
-
-    .exp-proj {
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 24px;
-    }
-    .exp-proj:first-of-type { padding-top: 0; border-top: none; margin-top: 0; }
-    
-    .proj-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-    .proj-title a { color: var(--text); }
-    .proj-title a:hover { color: var(--accent); text-decoration: none; }
-    
-    .proj ul {
-      list-style: none;
-      margin-bottom: 16px;
-    }
-    .proj li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .proj li::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 10px;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--text-tertiary);
-    }
-    .proj .stack {
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-      margin-top: 8px;
-      display: inline-block;
-      background: var(--bg);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-    }
-
-    /* ── education / certs ── */
-    .certs-list {
-      display: grid;
-      gap: 16px;
-    }
-    .cert-item {
-      background: var(--surface);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      transition: background 0.2s ease;
-    }
-    .cert-item:hover { background: var(--surface-hover); }
-    .cert-check {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(41, 151, 255, 0.15);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-weight: 600;
-    }
-    .cert-info h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
+    .exp { margin-bottom: 40px; }
+    .exp-role { 
+      color: var(--text-bright); 
+      font-weight: 600; 
+      font-size: 1rem; 
       margin-bottom: 4px;
     }
-    .cert-info p {
+    .exp-meta { 
+      font-size: 0.8rem; 
+      color: var(--comment); 
+      margin-bottom: 16px; 
+    }
+    .exp-meta .company { color: var(--green); }
+    .exp-meta .date { color: var(--blue); }
+    .exp-meta .sep { margin: 0 6px; color: var(--comment); }
+    
+    .exp-proj { margin-top: 24px; }
+    .proj-title { 
+      font-size: 0.9rem; 
+      margin-bottom: 8px; 
+      color: var(--text-bright);
+    }
+    .proj-title a { 
+      color: var(--text-bright); 
+      text-decoration: underline;
+      text-decoration-color: var(--comment);
+    }
+    .proj-title a:hover { 
+      color: var(--blue); 
+      text-decoration-color: var(--blue);
+    }
+    .proj ul { list-style: none; margin-bottom: 8px; padding-left: 16px; }
+    .proj li { 
+      font-size: 0.85rem; 
+      position: relative; 
+      margin-bottom: 6px; 
+      line-height: 1.7; 
+      color: var(--text);
+    }
+    .proj li::before { 
+      content: "-"; 
+      position: absolute; 
+      left: -12px; 
+      color: var(--comment); 
+    }
+    .proj .stack { 
+      font-size: 0.8rem; 
+      color: var(--comment); 
+      margin-top: 8px; 
+      padding-left: 16px;
+    }
+    .proj .stack::before { content: "$ "; color: var(--green); }
+    .proj .stack span { color: var(--magenta); }
+
+    /* ── certs ── */
+    .cert-item { 
+      margin-bottom: 8px; 
+      padding-left: 16px; 
+      position: relative; 
       font-size: 0.9rem;
-      color: var(--text-secondary);
     }
+    .cert-item::before { 
+      content: "*"; 
+      position: absolute; 
+      left: 0; 
+      color: var(--green); 
+    }
+    .cert-item h3 { 
+      font-size: 0.9rem; 
+      color: var(--text); 
+      font-weight: 400; 
+      display: inline; 
+    }
+    .cert-item p { 
+      font-size: 0.8rem; 
+      color: var(--comment); 
+      display: inline; 
+    }
+    .cert-item p::before { content: " - "; color: var(--comment); }
 
     /* ── footer ── */
-    footer {
-      text-align: center;
-      padding: 40px 0 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 80px;
+    footer { 
+      margin-top: 64px; 
+      padding-top: 32px; 
+      border-top: 1px solid var(--comment); 
+      text-align: center; 
+      opacity: 0.8;
     }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
+    .footer-links { 
+      margin-bottom: 12px; 
+      display: flex; 
+      justify-content: center; 
+      gap: 16px; 
     }
-    .footer-links a {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
+    .footer-links a { 
+      font-size: 0.8rem; 
+      text-decoration: none; 
+      color: var(--blue); 
     }
-    .footer-links a:hover { color: var(--text); text-decoration: none; }
-    .footer-copy {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
+    .footer-links a:hover { color: var(--text-bright); }
+    .footer-copy { 
+      font-size: 0.75rem; 
+      color: var(--comment); 
     }
-    .footer-copy .heart { color: #ff3b30; }
+    .footer-copy .heart { color: var(--red); }
 
     /* ── responsive ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .menu-btn { display: block; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(0,0,0,0.95);
-        padding: 20px;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        gap: 16px;
-      }
-      .container { padding: 100px 20px 60px; }
-      .exp-card { padding: 24px; }
-      .exp-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
-      .exp-meta .dot { display: none; }
+    @media (max-width: 600px) {
+      body { padding: 20px 16px; font-size: 13px; }
+      .hero-contact { gap: 4px; }
+      .divider { display: none; }
     }
   </style>
 </head>
 <body>
 
-<div class="nav-wrapper">
-  <nav class="nav">
-    <a href="#hero" class="nav-brand">Saikat Roy</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
+  <header>
+    <div class="prompt">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd" id="heroCmd"></span><span class="cursor"></span>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">
-      <svg class="menu-svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </button>
-  </nav>
-</div>
-
-<div class="container">
-  
-  <!-- HERO -->
-  <header class="hero" id="hero">
     <h1>Saikat Roy</h1>
-    <p class="subtitle">DevOps / Site Reliability Engineer</p>
+    <p class="hero-subtitle">DevOps / Site Reliability Engineer</p>
     
     <div class="hero-contact">
       <a href="tel:+917047265894">+91 70472 65894</a>
@@ -379,15 +301,25 @@
       <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">linkedin.com/in/saikatroy973</a>
     </div>
     
-    <a href="https://drive.google.com/file/d/1hi976VGJKstxNtlI633w243JvwiXvCBj/view?usp=drive_link" target="_blank" rel="noopener" class="btn-primary">
-      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-      Download CV
+    <a href="https://drive.google.com/file/d/1hi976VGJKstxNtlI633w243JvwiXvCBj/view?usp=drive_link" target="_blank" rel="noopener" class="dl-btn">
+      <span class="cmd-sym">$</span>wget <span class="file">resume.pdf</span>
     </a>
+    
+    <nav>
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#experience">experience</a>
+      <a href="#education">certs</a>
+    </nav>
+    <div class="divider"></div>
   </header>
 
   <!-- ABOUT -->
   <section id="about">
-    <h2 class="section-title">About</h2>
+    <div class="prompt section-prompt">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd">cat about.txt</span>
+    </div>
     <p class="about-text">
       <strong>DevOps / Site Reliability Engineer (SRE)</strong> with around 3 years of experience
       building and running production systems on <span class="tech">Kubernetes</span> and <span class="tech">AWS</span>. Skilled in
@@ -401,50 +333,89 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid" id="skillsGrid"></div>
+    <div class="prompt section-prompt">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd">cat skills.conf</span>
+    </div>
+    <div id="skillsGrid"></div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <h2 class="section-title">Experience</h2>
+    <div class="prompt section-prompt">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd">tail -n 20 experience.log</span>
+    </div>
     <div id="expContainer"></div>
   </section>
 
   <!-- EDUCATION -->
   <section id="education">
-    <h2 class="section-title">Education & Certs</h2>
-    <div class="certs-list" id="certContainer"></div>
+    <div class="prompt section-prompt">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd">ls certs/</span>
+    </div>
+    <div id="certContainer"></div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-links">
-      <a href="https://github.com/saikatroy973" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:saikatroy97@outlook.com">Email</a>
+    <div class="prompt" style="justify-content: center; margin-bottom: 12px;">
+      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
+      <span class="cmd">exit</span>
     </div>
-    <p class="footer-copy">&copy; 2026 Saikat Roy <span class="heart">♥</span> Built with passion</p>
+    <div class="footer-links">
+      <a href="https://github.com/saikatroy973" target="_blank" rel="noopener">github</a>
+      <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">linkedin</a>
+      <a href="mailto:saikatroy97@outlook.com">email</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Saikat Roy <span class="heart">♥</span> Built from the terminal</p>
   </footer>
-</div>
 
 <script>
+/* ── hero typing effect ── */
+(function() {
+  const commands = [
+    'whoami',
+    'echo $ROLE',
+    'cat /etc/motd',
+    'neofetch'
+  ];
+  const cmdEl = document.getElementById('heroCmd');
+  let ci = 0, charIdx = 0;
+  const speed = 60;
+
+  function type() {
+    if (ci >= commands.length) return;
+    const cmd = commands[ci];
+    if (charIdx <= cmd.length) {
+      cmdEl.textContent = cmd.slice(0, charIdx);
+      charIdx++;
+      setTimeout(type, speed);
+    } else {
+      setTimeout(() => { charIdx = 0; ci++; type(); }, 1200);
+    }
+  }
+
+  type();
+})();
+
 /* ── skills data ── */
 const skills = [
   { cat: "Cloud", tags: ["AWS (EKS, EC2, S3, IAM, Lambda, CloudWatch)", "Azure (AKS, Blob, IAM)", "GCP (GKE, Cloud Storage)"] },
-  { cat: "Containers & Orchestration", tags: ["Kubernetes (kubeadm, EKS, AKS, GKE, Kind, K3s)", "Docker", "Helm", "Kustomize"] },
-  { cat: "CI/CD, GitOps & VCS", tags: ["GitHub Actions", "Argo CD", "Git", "GitOps workflows"] },
+  { cat: "Containers", tags: ["Kubernetes (kubeadm, EKS, AKS, GKE, Kind, K3s)", "Docker", "Helm", "Kustomize"] },
+  { cat: "CI/CD & GitOps", tags: ["GitHub Actions", "Argo CD", "Git", "GitOps workflows"] },
   { cat: "IaC & Automation", tags: ["Terraform", "Ansible"] },
-  { cat: "Scripting & Languages", tags: ["Python", "SQL", "Bash", "Shell"] },
-  { cat: "Monitoring & Logging", tags: ["Prometheus", "Grafana", "ELK stack", "CloudWatch Logs", "SLO/SLI alerting"] },
+  { cat: "Scripting", tags: ["Python", "SQL", "Bash", "Shell"] },
+  { cat: "Monitoring", tags: ["Prometheus", "Grafana", "ELK stack", "CloudWatch Logs", "SLO/SLI alerting"] },
   { cat: "Security", tags: ["OPA Gatekeeper", "Falco", "Trivy", "Vault", "RBAC", "TLS", "Network Policies"] },
   { cat: "Platform & Streaming", tags: ["Linux admin", "etcd", "KEDA autoscaling", "Kafka (Strimzi)", "Kafka Connect"] }
 ];
 
 document.getElementById("skillsGrid").innerHTML = skills.map(s => `
   <div class="skill-cat">
-    <h3>${s.cat}</h3>
-    <div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+    <span class="skill-cat-label">${s.cat}</span>
+    <span class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}</span>
   </div>
 `).join("");
 
@@ -495,20 +466,20 @@ const experience = [
 ];
 
 document.getElementById("expContainer").innerHTML = experience.map(e => `
-  <div class="exp-card">
+  <div class="exp">
     <div class="exp-role">${e.role}</div>
     <div class="exp-meta">
-      <span class="company">${e.company}</span>
-      <span class="dot"></span>
+      <span class="company">${e.company}</span> 
+      <span class="sep">·</span> 
       <span class="date">${e.date}</span>
     </div>
     ${e.projects.map(p => `
       <div class="exp-proj">
-        <div class="proj-title">
-          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener">${p.title} ↗</a>` : p.title}
-        </div>
+        <p class="proj-title">
+          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` : p.title}
+        </p>
         <ul>${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
-        <div class="stack">${p.stack}</div>
+        <p class="stack"><span>${p.stack}</span></p>
       </div>
     `).join("")}
   </div>
@@ -524,25 +495,10 @@ const certs = [
 
 document.getElementById("certContainer").innerHTML = certs.map(c => `
   <div class="cert-item">
-    <div class="cert-check">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
-    </div>
-    <div class="cert-info">
-      <h3>${c.title}</h3>
-      ${c.detail ? `<p>${c.detail}</p>` : ''}
-    </div>
+    <h3>${c.title}</h3>
+    ${c.detail ? `<p>${c.detail}</p>` : ''}
   </div>
 `).join("");
-
-/* ── mobile menu toggle ── */
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-menuBtn.addEventListener("click", () => navLinks.classList.toggle("open"));
-document.querySelectorAll(".nav-links a").forEach(a =>
-  a.addEventListener("click", () => navLinks.classList.remove("open"))
-);
 </script>
 
 </body>
