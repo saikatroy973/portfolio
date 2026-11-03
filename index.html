@@ -463,39 +463,6 @@ document.getElementById("skillsGrid").innerHTML = skills.map(s => `
 const experience = [
   {
     role: "Cloud Engineer",
-    company: "Zex",
-    date: "August 2026 - September 2026",
-    projects: [
-      {
-        title: "Cybersecurity Application on AWS",
-        bullets: [
-          "Built and deployed a secure cybersecurity application on Amazon Elastic Kubernetes Service (EKS), ensuring scalable and reliable container management.",
-          "Automated infrastructure rollout using Terraform, securing the network with AWS VPC, Security Groups and AWS WAF to enforce access controls.",
-          "Streamlined deployments with GitHub Actions. Integrated vulnerability scanning and AWS Security Hub to catch threats before production.",
-          "Secured sensitive credentials using AWS Secrets Manager and set up proactive alerts with CloudWatch and CloudWatch Logs."
-        ],
-        stack: "AWS (EKS, VPC, Secrets Manager, WAF, CloudWatch), Kubernetes, Terraform, Docker, GitHub Actions, Go"
-      }
-    ]
-  },
-  {
-    role: "Cloud Engineer (Freelance)",
-    company: "Self-Employed",
-    date: "January 2025 - July 2026",
-    projects: [
-      {
-        title: "Self-Hosted LLM using llama.cpp",
-        bullets: [
-          "Deployed the GLM-5.2 large language model privately on a Linux VPS using llama.cpp, keeping full control over data.",
-          "Tuned GGUF quantized models to balance memory use and inference speed on CPU-only hardware.",
-          "Built an OpenAI-compatible REST API in Go to connect the LLM with custom tools and front-end clients."
-        ],
-        stack: "llama.cpp, Go, Docker, Docker Compose, GLM-5.2, Hugging Face, Linux VPS"
-      }
-    ]
-  },
-  {
-    role: "Cloud Engineer",
     company: "Tech Mahindra",
     date: "March 2022 - December 2024",
     projects: [
@@ -522,6 +489,39 @@ const experience = [
         stack: "Confluent Kafka, Kubeflow/Airflow, Schema Registry, Kafka Connect, AWS (Glue, S3, Redshift), Prometheus/Grafana, Terraform, Go"
       }
     ]
+  },
+  {
+    role: "Cloud Engineer (Freelance)",
+    company: "Self-Employed",
+    date: "January 2025 - July 2026",
+    projects: [
+      {
+        title: "Self-Hosted LLM using llama.cpp",
+        bullets: [
+          "Deployed the GLM-5.2 large language model privately on a Linux VPS using llama.cpp, keeping full control over data.",
+          "Tuned GGUF quantized models to balance memory use and inference speed on CPU-only hardware.",
+          "Built an OpenAI-compatible REST API in Go to connect the LLM with custom tools and front-end clients."
+        ],
+        stack: "llama.cpp, Go, Docker, Docker Compose, GLM-5.2, Hugging Face, Linux VPS"
+      }
+    ]
+  },
+  {
+    role: "Cloud Engineer",
+    company: "Zex",
+    date: "August 2026 - September 2026",
+    projects: [
+      {
+        title: "Cybersecurity Application on AWS",
+        bullets: [
+          "Built and deployed a secure cybersecurity application on Amazon Elastic Kubernetes Service (EKS), ensuring scalable and reliable container management.",
+          "Automated infrastructure rollout using Terraform, securing the network with AWS VPC, Security Groups and AWS WAF to enforce access controls.",
+          "Streamlined deployments with GitHub Actions. Integrated vulnerability scanning and AWS Security Hub to catch threats before production.",
+          "Secured sensitive credentials using AWS Secrets Manager and set up proactive alerts with CloudWatch and CloudWatch Logs."
+        ],
+        stack: "AWS (EKS, VPC, Secrets Manager, WAF, CloudWatch), Kubernetes, Terraform, Docker, GitHub Actions, Go"
+      }
+    ]
   }
 ];
 
@@ -546,11 +546,9 @@ document.getElementById("expContainer").innerHTML = experience.map(e => `
 
 /* ── education / certs ── */
 const certs = [
-  { title: "B.Tech in Computer Science", detail: "MAKAUT, West Bengal" },
   { title: "AWS Certified Cloud Practitioner (CLF-C02)", detail: "" },
   { title: "Microsoft Certified: Azure Data Fundamentals (AZ-900)", detail: "" },
-  { title: "Microsoft Certified: Azure Data Engineer (DP-700)", detail: "" },
-  { title: "English", detail: "Professional" }
+  { title: "Microsoft Certified: Azure Data Engineer (DP-700)", detail: "" }
 ];
 
 document.getElementById("certContainer").innerHTML = certs.map(c => `
