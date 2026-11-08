@@ -431,7 +431,7 @@ const techKeywords = [
   "Secrets Manager", "Security Hub", "WAF", "VPC", "CloudWatch", "Glue", "Kubernetes",
   "Terraform", "Ansible", "Argo CD", "GitOps", "GitHub Actions", "Docker", "Helm",
   "Prometheus", "Grafana", "Trivy", "Vault", "Go", "Python", "Bash", "SQL",
-  "Confluent Kafka", "Kafka Connect", "Schema Registry", "Kubeflow", "Airflow",
+  "Confluent Kafka", "Kafka Connect", "Schema Registry", "ClickHouse", "Kubeflow", "Airflow",
   "GLM-5.2", "llama.cpp", "GGUF", "OpenAI-compatible REST API", "Hugging Face",
   "Linux VPS", "Network Policies", "TLS", "RBAC"
 ];
@@ -484,9 +484,10 @@ const experience = [
           "Wrote Go-based Kafka producers and consumers to process and publish live data streams.",
           "Maintained Kafka cluster health, fine-tuning topic partitions and broker configurations.",
           "Connected Kafka with AWS Glue using Kafka Connect, routing cleaned data directly into an Amazon S3 data lake.",
+          "Integrated Kafka with ClickHouse through Kafka Connect, streaming events into a real-time analytics store for low-latency SQL queries and dashboards.",
           "Loaded the processed data into Amazon Redshift, using it as the data warehouse for fast SQL analytics, reporting, and downstream consumption."
         ],
-        stack: "Confluent Kafka, Kubeflow/Airflow, Schema Registry, Kafka Connect, AWS (Glue, S3, Redshift), Prometheus/Grafana, Terraform, Go"
+        stack: "Confluent Kafka, ClickHouse, Kubeflow/Airflow, Schema Registry, Kafka Connect, AWS (Glue, S3, Redshift), Prometheus/Grafana, Terraform, Go"
       }
     ]
   },
