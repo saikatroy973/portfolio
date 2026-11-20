@@ -141,13 +141,6 @@
     .section-prompt { margin-bottom: 16px; }
     .divider { border-bottom: 1px solid var(--comment); margin-bottom: 32px; opacity: 0.5; }
 
-    /* ── about ── */
-    .about-text { 
-      font-size: 0.9rem; 
-      line-height: 1.8; 
-    }
-    .about-text strong { color: var(--text-bright); font-weight: 600; }
-    
     /* Shared tech highlight class */
     .tech { color: var(--cyan); font-weight: 500; }
 
@@ -188,6 +181,13 @@
     .exp-meta .company { color: var(--green); }
     .exp-meta .date { color: var(--blue); }
     .exp-meta .sep { margin: 0 6px; color: var(--comment); }
+
+    .exp-summary {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+    .exp-summary strong { color: var(--text-bright); font-weight: 600; }
     
     .exp-proj { 
       margin-top: 28px; 
@@ -210,12 +210,12 @@
       color: var(--text-bright); 
       text-decoration-color: var(--yellow);
     }
-    .proj ul { 
+    .exp-proj ul { 
       list-style: none; 
       margin-bottom: 12px; 
       padding-left: 8px;
     }
-    .proj li { 
+    .exp-proj li { 
       font-size: 0.85rem; 
       position: relative; 
       margin-bottom: 8px; 
@@ -223,30 +223,30 @@
       color: var(--text);
       padding-left: 20px;
     }
-    .proj li::before { 
+    .exp-proj li::before { 
       content: "├─"; 
       position: absolute; 
       left: 0; 
       color: var(--green); 
     }
-    .proj li:last-child::before { 
+    .exp-proj li:last-child::before { 
       content: "└─"; 
       color: var(--green);
     }
-    .proj .stack { 
+    .exp-proj .stack { 
       font-size: 0.8rem; 
       margin-top: 10px; 
       padding-left: 8px;
       color: var(--comment);
     }
-    .proj .stack::before { 
+    .exp-proj .stack::before { 
       content: "$ "; 
       color: var(--green); 
     }
-    .proj .stack .lbl { 
+    .exp-proj .stack .lbl { 
       color: var(--blue); 
     }
-    .proj .stack .val { 
+    .exp-proj .stack .val { 
       color: var(--magenta); 
     }
 
@@ -327,34 +327,17 @@
       <a href="https://linkedin.com/in/saikatroy973" target="_blank" rel="noopener">linkedin.com/in/saikatroy973</a>
     </div>
 
-    <a href="https://drive.google.com/file/d/1_w28vc3zHWJ78Z4_kdawMfQvHGw3UurI/view?usp=drive_link" target="_blank" rel="noopener" class="dl-btn" aria-label="Download Saikat Roy CV">
+    <a href="saikat-roy-cv.pdf" download="saikat-roy-cv.pdf" class="dl-btn" aria-label="Download Saikat Roy CV">
       <span class="cmd-sym">$</span>wget <span class="file">saikat-roy-cv.pdf</span>
     </a>
     
     <nav>
-      <a href="#about">about</a>
       <a href="#skills">skills</a>
       <a href="#experience">experience</a>
       <a href="#credentials">credentials</a>
     </nav>
     <div class="divider"></div>
   </header>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="prompt section-prompt">
-      <span class="user">saikat</span><span class="at">@</span><span class="host">portfolio</span><span class="colon">:</span><span class="path">~</span><span class="dollar">$</span>
-      <span class="cmd">cat about.txt</span>
-    </div>
-    <p class="about-text">
-      <strong>Multi-Cloud Engineer</strong> with approximately 5 years of experience designing, automating,
-      and running production systems across <span class="tech">AWS</span> and <span class="tech">Azure</span>, with deep hands-on
-      expertise in the <span class="tech">AWS</span> ecosystem. Specialized in <span class="tech">EKS</span>,
-      <span class="tech">Terraform</span>, <span class="tech">Kubernetes</span>, <span class="tech">CI/CD</span> with
-      <span class="tech">GitHub Actions</span>, <span class="tech">GitOps</span>, and observability with
-      <span class="tech">CloudWatch</span>, <span class="tech">Prometheus</span>, and <span class="tech">Grafana</span>.
-    </p>
-  </section>
 
   <!-- SKILLS -->
   <section id="skills">
@@ -427,7 +410,7 @@
 
 /* ── text highlighter for project bullets ── */
 const techKeywords = [
-  "AWS", "Amazon", "Azure", "EKS", "EC2", "S3", "RDS", "Redshift", "IAM", "Lambda",
+  "AWS", "Amazon", "Azure", "GCP", "EKS", "EC2", "S3", "RDS", "Redshift", "IAM", "Lambda",
   "Secrets Manager", "Security Hub", "WAF", "VPC", "CloudWatch", "Glue", "Kubernetes",
   "Terraform", "Ansible", "Argo CD", "GitOps", "GitHub Actions", "Docker", "Helm",
   "Prometheus", "Grafana", "Trivy", "Vault", "Go", "Python", "Bash", "SQL",
@@ -492,37 +475,11 @@ const experience = [
     ]
   },
   {
-    role: "Cloud Engineer (Freelance)",
-    company: "Self-Employed",
-    date: "January 2025 - July 2026",
-    projects: [
-      {
-        title: "Self-Hosted LLM using llama.cpp",
-        bullets: [
-          "Deployed the GLM-5.2 large language model privately on a Linux VPS using llama.cpp, keeping full control over data.",
-          "Tuned GGUF quantized models to balance memory use and inference speed on CPU-only hardware.",
-          "Built an OpenAI-compatible REST API in Go to connect the LLM with custom tools and front-end clients."
-        ],
-        stack: "llama.cpp, Go, Docker, Docker Compose, GLM-5.2, Hugging Face, Linux VPS"
-      }
-    ]
-  },
-  {
     role: "Cloud Engineer",
-    company: "Zex",
-    date: "August 2026 - September 2026",
-    projects: [
-      {
-        title: "Cybersecurity Application on AWS",
-        bullets: [
-          "Built and deployed a secure cybersecurity application on Amazon Elastic Kubernetes Service (EKS), ensuring scalable and reliable container management.",
-          "Automated infrastructure rollout using Terraform, securing the network with AWS VPC, Security Groups and AWS WAF to enforce access controls.",
-          "Streamlined deployments with GitHub Actions. Integrated vulnerability scanning and AWS Security Hub to catch threats before production.",
-          "Secured sensitive credentials using AWS Secrets Manager and set up proactive alerts with CloudWatch and CloudWatch Logs."
-        ],
-        stack: "AWS (EKS, VPC, Secrets Manager, WAF, CloudWatch), Kubernetes, Terraform, Docker, GitHub Actions, Go"
-      }
-    ]
+    company: "DevX",
+    date: "January 2025 - October 2026",
+    summary: "<strong>Multi-Cloud Engineer</strong> with approximately 5 years of experience designing, automating, and running production systems across AWS and GCP, with deep hands-on expertise in the AWS ecosystem. Specialized in EKS, Terraform, Kubernetes, CI/CD with GitHub Actions, GitOps, and observability with CloudWatch, Prometheus, and Grafana.",
+    projects: []
   }
 ];
 
@@ -533,7 +490,8 @@ document.getElementById("expContainer").innerHTML = experience.map(e => `
       ${e.company ? `<span class="company">${e.company}</span><span class="sep">·</span>` : ""}
       <span class="date">${e.date}</span>
     </div>
-    ${e.projects.map(p => `
+    ${e.summary ? `<p class="exp-summary">${highlightTech(e.summary)}</p>` : ""}
+    ${(e.projects || []).map(p => `
       <div class="exp-proj">
         <p class="proj-title">
           ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` : p.title}
@@ -547,9 +505,9 @@ document.getElementById("expContainer").innerHTML = experience.map(e => `
 
 /* ── education / certs ── */
 const certs = [
-  { title: "AWS Certified Cloud Practitioner (CLF-C02)", detail: "" },
-  { title: "Microsoft Certified: Azure Data Fundamentals (AZ-900)", detail: "" },
-  { title: "Microsoft Certified: Azure Data Engineer (DP-700)", detail: "" }
+  { title: "Google Cloud Certified – Associate Cloud Engineer", detail: "" },
+  { title: "Certified Kubernetes Administrator (CKA)", detail: "" },
+  { title: "AWS Certified Cloud Practitioner (CLF-C02)", detail: "" }
 ];
 
 document.getElementById("certContainer").innerHTML = certs.map(c => `
