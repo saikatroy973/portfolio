@@ -416,7 +416,7 @@ const techKeywords = [
   "Prometheus", "Grafana", "Trivy", "Vault", "Go", "Python", "Bash", "SQL",
   "Confluent Kafka", "Kafka Connect", "Schema Registry", "Kafka", "ClickHouse", "Kubeflow", "Airflow",
   "GLM-5.2", "llama.cpp", "GGUF", "OpenAI-compatible REST API", "Hugging Face",
-  "Linux VPS", "Network Policies", "TLS", "RBAC"
+  "Linux VPS", "Network Policies", "TLS", "RBAC", "FastAPI", "MCP", "SQLite", "OpenTelemetry", "Ed25519"
 ];
 
 function highlightTech(text) {
@@ -479,7 +479,27 @@ const experience = [
     company: "DevX",
     date: "January 2025 - October 2026",
     summary: "<strong>Multi-Cloud Engineer</strong> with approximately 5 years of experience designing, automating, and running production systems across AWS and GCP, with deep hands-on expertise in the AWS ecosystem. Specialized in EKS, Terraform, Kubernetes, CI/CD with GitHub Actions, GitOps, and observability with CloudWatch, Prometheus, and Grafana.",
-    projects: []
+    projects: [
+      {
+        title: "Cybersecurity Application on AWS",
+        bullets: [
+          "Built and deployed a secure cybersecurity application on Amazon Elastic Kubernetes Service (EKS), ensuring scalable and reliable container management.",
+          "Automated infrastructure rollout using Terraform, securing the network with AWS VPC, Security Groups and AWS WAF to enforce access controls.",
+          "Streamlined deployments with GitHub Actions. Integrated vulnerability scanning and AWS Security Hub to catch threats before production.",
+          "Secured sensitive credentials using AWS Secrets Manager and set up proactive alerts with CloudWatch and CloudWatch Logs."
+        ],
+        stack: "AWS (EKS, VPC, Secrets Manager, WAF, CloudWatch), Kubernetes, Terraform, Docker, GitHub Actions, Go"
+      },
+      {
+        title: "AI SRE — Multi-agent Kubernetes incident investigation platform",
+        bullets: [
+          "Built a six-agent SRE team (incident commander, cluster/telemetry/change analysts, memory researcher, evidence verifier) that collaborates in Switch rooms and either produces a diagnosis with cited evidence or explicitly abstains.",
+          "Engineered a read-only evidence pipeline over Kubernetes APIs and MCP tools with deterministic verification of provenance, digests, scope and citations — backed by 294 automated tests and fail-closed error handling.",
+          "Hardened the platform with Ed25519 actor-scoped credentials, hash-chained tamper-evident audit logs, tenant/namespace authorization, bounded secret-redacted log/metric reads, least-privilege RBAC, Docker isolation, and a Switch Trust/ROI evaluation harness."
+        ],
+        stack: "Python, FastAPI, MCP, Kubernetes, SQLite, OpenTelemetry"
+      }
+    ]
   }
 ];
 
